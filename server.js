@@ -24,7 +24,8 @@ app.get("/oauth/start", (req, res) => {
     return res.status(500).send("Missing Polar configuration. Check Render environment variables.");
   }
   const state = createState();
-  const params = new URLSearchParams({
+  const formatPolarDate = (date) => date.toISOString().replace(/\.\d{3}Z$/, "");
+const params = new URLSearchParams({ from: formatPolarDate(from), to: formatPolarDate(to) });
     client_id: CLIENT_ID,
     response_type: "code",
     scope: "activity:read training_sessions:read profile:read",
