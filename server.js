@@ -1,3 +1,6 @@
+
+
+
 const express = require("express");
 const crypto = require("crypto");
 
@@ -24,8 +27,7 @@ app.get("/oauth/start", (req, res) => {
     return res.status(500).send("Missing Polar configuration. Check Render environment variables.");
   }
   const state = createState();
-  const formatPolarDate = (date) => date.toISOString().replace(/\.\d{3}Z$/, "");
-const params = new URLSearchParams({ from: formatPolarDate(from), to: formatPolarDate(to) });
+  const params = new URLSearchParams({
     client_id: CLIENT_ID,
     response_type: "code",
     scope: "activity:read training_sessions:read profile:read",
@@ -161,5 +163,3 @@ app.get("/polar/sessions", async (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Pierino Coach Polar backend listening on port ${PORT}`);
 });
-
-
