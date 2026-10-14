@@ -138,11 +138,14 @@ app.get("/polar/sessions", async (req, res) => {
     const ok = await ensureFreshToken();
     if (!ok) return res.status(401).json({ connected: false, message: "Token assente o scaduto. Ricollega Polar da /oauth/start." });
 
-    const to = new Date();
-    const from = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-    const params = new URLSearchParams({
-  from: from.toISOString().slice(0, 10),
-  to: to.toISOString().slice(0, 10)
+    const url = "https://www.polaraccesslink.com/v4/data/training-sessions/list";
+
+const response = await fetch(url, {
+  headers: {
+    Authorization: `Bearer ${polarTokens.access_token}`,
+    Accept: "application/json"
+  }
+});
 });
     const response = await fetch(`https://www.polaraccesslink.com/v4/data/training-sessions/list?${params.toString()}`, {
       headers: { Authorization: `Bearer ${polarTokens.access_token}`, Accept: "application/json" }
