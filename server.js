@@ -245,9 +245,9 @@ app.get("/polar/sessions", async (req, res) => {
     );
 
     const params = new URLSearchParams({
-      from: from.toISOString().slice(0, 10),
-      to: to.toISOString().slice(0, 10)
-    });
+  from: from.toISOString().slice(0, 19),
+  to: to.toISOString().slice(0, 19)
+});
 
     const url =
       "https://www.polaraccesslink.com/v4/data/training-sessions/list?" +
